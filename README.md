@@ -18,9 +18,9 @@ This repository contains code necessary to run GAMENet model. GAMENet is an end-
 ## Running the code
 ### Data preprocessing
 In ./data, you can find the well-preprocessed data in pickle form. Also, it's easy to re-generate the data as follows:
-1.  download [MIMIC data](https://mimic.physionet.org/gettingstarted/dbsetup/) and put DIAGNOSES_ICD.csv, PRESCRIPTIONS.csv, PROCEDURES_ICD.csv in ./data/
-2.  download [DDI data](https://www.dropbox.com/s/8os4pd2zmp2jemd/drug-DDI.csv?dl=0) and put it in ./data/
-3.  run code **./data/EDA.ipynb**. You can simply run this code on a Jupyter Notebook. Note that the above files are prerequisites to output the pickle files.
+1.  Download [MIMIC data](https://mimic.physionet.org/gettingstarted/dbsetup/) and put DIAGNOSES_ICD.csv, PRESCRIPTIONS.csv, PROCEDURES_ICD.csv in ./data/
+2.  Download [DDI data](https://www.dropbox.com/s/8os4pd2zmp2jemd/drug-DDI.csv?dl=0) and put it in ./data/
+3.  Run the code **./data/EDA.ipynb**. You can simply run this code on a Jupyter Notebook. Note that the above files are prerequisites to output the pickle files.
 
 Data information in ./data:
   - records_final.pkl is the input data with four dimension (patient_idx, visit_idx, medical modal, medical id) where medical model equals 3 made of diagnosis, procedure and drug.
@@ -43,12 +43,12 @@ Data information in ./data:
  
  
  ### GAMENet
- Here are the commands to train/test the GAMENet model.
+ Here are the commands to train/test the GAMENet model. The evaluation step requires a file path. Pass in the file path to the "best epoch" that the trained model achieves. It will be printed at the end after running the training code.
  ```
- python train_GAMENet.py --model_name GAMENet --ddi# training the model with DDI knowledge
- python train_GAMENet.py --model_name GAMENet --ddi --resume_path Epoch_{}_JA_{}_DDI_{}.model --eval # testing the model with DDI knowledge
- python train_GAMENet.py --model_name GAMENet # training the model without DDI knowledge
- python train_GAMENet.py --model_name GAMENet --resume_path Epoch_{}_JA_{}_DDI_{}.model --eval # testing the model without DDI knowledge
+ Training the model with DDI knowledge: python train_GAMENet.py --model_name GAMENet --ddi
+ Testing the model with DDI knowledge: python train_GAMENet.py --model_name GAMENet --ddi --resume_path Epoch_{}_JA_{}_DDI_{}.model --eval
+ Training the model without DDI knowledge: python train_GAMENet.py --model_name GAMENet
+ Testing the model without DDI knowledge: python train_GAMENet.py --model_name GAMENet --resume_path Epoch_{}_JA_{}_DDI_{}.model --eval 
  ```
  
 ## Cite 
